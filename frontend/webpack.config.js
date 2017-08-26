@@ -46,11 +46,6 @@ let config = {
       version: packageJson.version,
       name: packageJson.name,
       template: './src/index.html'
-    }),
-    new webpack.ProvidePlugin({
-        _: "lodash",
-        $: "jquery",
-        jQuery: "jquery"
     })
   ],
   devServer: {
