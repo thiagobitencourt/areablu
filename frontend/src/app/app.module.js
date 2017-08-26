@@ -10,12 +10,14 @@ let markers = [];
 let parkingCircle;
 let markerCluster;
 let defaultCircleRadius = 200;
-
+let currentDestinPosition;
+let polingInterval;
 
 const maps = {
   getParkingPlaces(position) {
     return API.getParkingLocations(position)
       .then(result => {
+        removeMarkers();
         result.map(mark => {
           createMarker({ lat: parseFloat(mark.lat), lng: parseFloat(mark.lng) })
         });
@@ -44,7 +46,11 @@ const maps = {
   },
   // Remove markers from map
   removeMarkers() {
-    markers.forEach(mark => mark.setMap(null));
+    markers.forEach(mark => {
+      mark.setMap(null);
+      mark.setVisible(false);
+    });
+    markers = [];
   },
   // Center the map in a given position
   centerMap(position) {
@@ -89,28 +95,27 @@ const maps = {
     });
     markers = [];
 
-    // For each place, get the icon, name and location.
-     places.forEach(function(place) {
-       if (!place.geometry) {
-         console.log("Returned place contains no geometry");
-         return;
-       }
+    let place = places[0];
+    if (!place.geometry) {
+      console.log("Returned place contains no geometry");
+      return;
+    }
 
-       let position = {
-         lat: place.geometry.location.lat(),
-         lng: place.geometry.location.lng()
-       }
-       centerMap(position);
-       map.setZoom(17);
+     let position = {
+       lat: place.geometry.location.lat(),
+       lng: place.geometry.location.lng()
+     }
+     centerMap(position);
+     map.setZoom(17);
 
-       if(parkingCircle) {
-         parkingCircle.setMap(null);
-       }
+     if(parkingCircle) {
+       parkingCircle.setMap(null);
+     }
 
-       createCircle(position);
-       getParkingPlaces(position);
-       document.getElementById('input-destino').value = "";
-     });
+     createCircle(position);
+     getParkingPlaces(position);
+     currentDestinPosition = position;
+     document.getElementById('input-destino').value = "";
   },
   // Método de inicialização
   initMap() {
@@ -133,7 +138,15 @@ const maps = {
         searchBox.setBounds(map.getBounds());
       });
       searchBox.addListener('places_changed', changeDetinLocation.bind(searchBox));
+      initializePoling();
     });
+  },
+
+  initializePoling() {
+    polingInterval = setInterval(() => {
+      console.log('Make request');
+      getParkingPlaces(currentDestinPosition)
+    }, 5000);
   }
 }
 
