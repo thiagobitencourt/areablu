@@ -48,6 +48,7 @@ let config = {
       template: './src/index.html'
     }),
     new webpack.ProvidePlugin({
+        _: "lodash",
         $: "jquery",
         jQuery: "jquery"
     })
