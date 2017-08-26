@@ -4,5 +4,5 @@ import com.areablu.entities.Vaga;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface VagaRepository extends CrudRepository<Vaga, String> {
+public interface VagaRepository extends CrudRepository<Vaga, String>, VagaRepositoryQueries {
 }

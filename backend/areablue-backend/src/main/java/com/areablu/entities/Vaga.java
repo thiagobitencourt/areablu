@@ -22,6 +22,15 @@ public class Vaga {
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	private String id;
 
+	private String sensorId;
+
+	private String latitude;
+
+	private String longitude;
+
+	@Enumerated(EnumType.STRING)
+	private VagaStatus status;
+
 	private Date createdAt;
 
 	private Date updatedAt;
@@ -30,6 +39,7 @@ public class Vaga {
 	private void beforePersist() {
 		createdAt = new Date();
 		updatedAt = createdAt;
+		status = VagaStatus.LIVRE;
 	}
 
 	@PreUpdate
