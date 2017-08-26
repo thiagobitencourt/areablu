@@ -1,7 +1,7 @@
 {
-  "name": "es6-seed",
+  "name": "areablu",
   "version": "1.0.0",
-  "description": "A base project for angularJS 1.x and ES6 with Karma/Jasmine tests",
+  "description": "A Hackathon project to find a parking location",
   "main": "src/index.html",
   "repository": {
     "type": "git",
