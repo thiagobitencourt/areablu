@@ -1,6 +1,6 @@
 <!-- VERSION <%= htmlWebpackPlugin.options.version %> -->
 <!DOCTYPE html>
-<html lang="pt-br" ng-app="app">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,6 +8,48 @@
     <meta name="<%= htmlWebpackPlugin.options.name %>" version="<%= htmlWebpackPlugin.options.version %>">
   </head>
   <body>
-    <ui-view></ui-view>
+    <!-- <app class="container"></app> -->
+    <div class="app-container">
+      <div class="header-container">
+
+        <div class="row margin-15">
+          <div class="input-field col s10">
+            <i class="material-icons prefix">room</i>
+            <input id="input-destino" class="controls" type="text" placeholder="Informe um destino">
+            <label for="input-destino">Destino</label>
+          </div>
+          <div class="col s2 hide-on-small-only">
+            <img id="logo-img" width="80" height="80">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="map-container">
+        <div id="map"></div>
+      </div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal modal-size">
+      <div class="modal-content">
+        <div class="row" style="margin-bottom: 3px;">
+          <div class="col s12">
+            <h4 class="center-align" id="car-info"></h4>
+            <h4 class="center-align" id="car-plate"></h4>
+          </div>
+          <br />
+          <div id="occupy-click" class="waves-effect waves-light btn col s12">
+            <span>Ocupar vaga</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaXE1N1IWzlv3Gg_PRVvaYJurBjEWE5ak&libraries=places&callback=initMap"></script>
   </body>
 </html>

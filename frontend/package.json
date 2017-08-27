@@ -1,7 +1,7 @@
 {
-  "name": "es6-seed",
+  "name": "areablu",
   "version": "1.0.0",
-  "description": "A base project for angularJS 1.x and ES6 with Karma/Jasmine tests",
+  "description": "A Hackathon project to find a parking location",
   "main": "src/index.html",
   "repository": {
     "type": "git",
@@ -49,6 +49,10 @@
   "dependencies": {
     "@uirouter/angularjs": "^1.0.6",
     "angular": "^1.6.4",
-    "jquery": "^3.2.1"
+    "angular-google-maps": "^2.4.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "jquery": "^3.2.1",
+    "lodash": "^4.17.4",
+    "materialize-css": "^0.100.1"
   }
 }

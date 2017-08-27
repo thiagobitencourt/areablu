@@ -20,7 +20,7 @@ let config = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['es2015']
+          presets: ['es2015', 'stage-2']
         }
       },
       {
@@ -46,10 +46,6 @@ let config = {
       version: packageJson.version,
       name: packageJson.name,
       template: './src/index.html'
-    }),
-    new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery"
     })
   ],
   devServer: {

@@ -3,7 +3,40 @@ $break-medium: 768px;
 $break-large: 992px;
 $break-x-large: 1200px;
 
-@import url('https://fonts.googleapis.com/css?family=Mogra');
-@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
-@import 'components/components';
-@import 'modules/modules';
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css');
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-size {
+  width: 35%;
+
+  @media screen and (max-width: $break-small) {
+    width: 70%;
+  }
+
+  @media screen and (min-width: $break-small) and (max-width: $break-large) {
+    width: 50%;
+  }
+}
+
+.app-container, #map {
+  height: 100%;
+}
+
+.app-container {
+  margin: 40px;
+}
+
+.map-container {
+  height: 100%;
+}
+
+.margin-15 {
+  margin-left: 15px;
+  margin-right: 15px;
+}
