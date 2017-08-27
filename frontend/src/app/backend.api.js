@@ -17,8 +17,15 @@ export default (function() {
 
     occupyParkingSpot(vagaId, placa) {
       return new Promise((resolve, reject) => {
-        $.post(API_URL + `/vaga/ocupar`, { vagaId, placa }, resolve);
+        $.ajax({
+          url: API_URL + '/vaga/ocupar',
+          type:"POST",
+          data: JSON.stringify({vagaId: vagaId, placa: placa}),
+          contentType:"application/json; charset=utf-8",
+          dataType:"json"
+        })
       });
+
     }
   };
 
