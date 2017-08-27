@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -24,9 +25,9 @@ public class Vaga {
 
 	private String sensorId;
 
-	private String latitude;
+	private Double latitude;
 
-	private String longitude;
+	private Double longitude;
 
 	@Enumerated(EnumType.STRING)
 	private VagaStatus status;
@@ -34,6 +35,9 @@ public class Vaga {
 	private Date createdAt;
 
 	private Date updatedAt;
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "vaga")
+	private List<VagaHistorico> vagaHistorico;
 
 	@PrePersist
 	private void beforePersist() {
