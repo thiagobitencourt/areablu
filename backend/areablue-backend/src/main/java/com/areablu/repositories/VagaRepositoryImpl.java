@@ -28,7 +28,7 @@ public class VagaRepositoryImpl implements VagaRepositoryQueries {
 
 	@Override public List<Vaga> list(VagasFilterDto filter) {
 		String sql = "select * from Vagas v "
-				+ "where earth_box(ll_to_earth("+ filter.getLat() + ","+ filter.getLng()+ "), " + filter.getDistance() + ") @> ll_to_earth(v.latitude, v.longitude)";
+				+ "where v.status != 'OCUPADA_CONFIRMADA' and earth_box(ll_to_earth("+ filter.getLat() + ","+ filter.getLng()+ "), " + filter.getDistance() + ") @> ll_to_earth(v.latitude, v.longitude)";
 
 		return entityManager.createNativeQuery( sql, Vaga.class ).getResultList();
 	}
