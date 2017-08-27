@@ -33,21 +33,11 @@
     <!-- Modal Structure -->
     <div id="modal1" class="modal modal-size">
       <div class="modal-content">
-        <div class="row" style="margin-bottom: 3px;">
-          <div class="col s12">
-            <h4 class="center-align" id="car-info"></h4>
-            <h4 class="center-align" id="car-plate"></h4>
-          </div>
-
+        <input value="" id="position-id" type="text">
+        <div class="row">
           <div class="input-field col s12">
-            <select id="select-permanencia">
-              <option value="15">15 minutos</option>
-              <option value="30">30 minutos</option>
-              <option value="60" selected>1 hora</option>
-              <option value="90">1:30 horas</option>
-              <option value="120">2 hora</option>
-            </select>
-            <label>Permanência</label>
+            <input value="" id="car-plate" type="text" class="validate">
+            <label for="car-plate">Placa</label>
           </div>
 
           <div id="occupy-click" style="margin-top: 15px" class="waves-effect waves-light btn col s12">

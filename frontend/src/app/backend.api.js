@@ -15,11 +15,9 @@ export default (function() {
       });
     },
 
-    occupyParkingSpot({ vaga, carro, permanencia }) {
+    occupyParkingSpot(vagaId, placa) {
       return new Promise((resolve, reject) => {
-        console.log({ vaga, carro, permanencia });
-        resolve("Chamar a ENDPOINT de acupar a vaga");
-        // $.post(API_URL + `/vaga/ocupar`);
+        $.post(API_URL + `/vaga/ocupar`, { vagaId, placa }, resolve);
       });
     }
   };
