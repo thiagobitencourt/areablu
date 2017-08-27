@@ -13,11 +13,22 @@ let defaultCircleRadius = 200;
 let currentDestinPosition;
 let polingInterval;
 
+// Configure the modal.
+$(document).ready(function(){
+  // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+  $('.modal').modal({
+    dismissible: true
+  });
+});
+
 const maps = {
   getParkingPlaces(position) {
-    return API.getParkingLocations(position)
+    return API.getParkingLocations(position, defaultCircleRadius)
       .then(result => {
         removeMarkers();
+        if(markerCluster) {
+          markerCluster.clearMarkers();
+        }
         result.map(mark => {
           createMarker({ lat: parseFloat(mark.lat), lng: parseFloat(mark.lng) })
         });
@@ -38,6 +49,10 @@ const maps = {
               var lng = position.coords.longitude;
               currentLocation = { lat, lng };
               resolve(currentLocation);
+          }, error => {
+            // Fallback to use a default user location
+            currentLocation = { lat: -26.909057299999997, lng: -49.0738722 };
+            resolve(currentLocation);
           });
       } else {
         reject("Navegador não puporta obter a sua localização atual");
@@ -56,11 +71,37 @@ const maps = {
   centerMap(position) {
     map.setCenter(position);
   },
+
+  ocuparVaga({ vaga, ...carro}) {
+      console.log(vaga, carro);
+      // Aqui chama a api de vincular um carro a uma vaga.
+  },
+  // Método chamado ao clicar em uma vaga
+  clickMarker() {
+    let { position: vaga } = this;
+    vaga.id = this.id;
+
+    let car = {
+      vaga,
+      id: 658,
+      placa: 'ABC-1234',
+      modelo: 'Mustang GT'
+    };
+    let modal = $('#modal1');
+    // Configura e abre a modal
+    $('#car-info').html(`<b>Carro:</b> ${car.modelo}`);
+    $('#car-plate').html(`<b>Placa:</b> ${car.placa}`);
+    $('#occupy-click').click(ocuparVaga.bind(null, car));
+    modal.modal('open');
+  },
   // Cria um novo marcado no mapa, centraliza o mapa no marcado se for solicitado
   createMarker(position, center) {
     // let icon = center ? undefined : { path: google.maps.SymbolPath.CIRCLE, strokeColor: "#306f11", fillColor: "#47e223", scale: 5 };
     let marker = new google.maps.Marker({ map, position });
+    marker.id = position.id;
+
     markers.push(marker);
+    marker.addListener('click', clickMarker);
 
     if(center) {
       centerMap(position);
@@ -125,10 +166,13 @@ const maps = {
         center: currentLocation,
         zoom: 14
       });
+      currentLocation.id = 654;
+      currentDestinPosition = currentLocation;
       // Centraliza o mapa na posição inicial do usuário
+      createMarker(currentLocation);
       centerMap(currentLocation);
       createCircle(currentLocation);
-      getParkingPlaces(currentLocation);
+      // getParkingPlaces(currentLocation);
       map.setZoom(17);
 
       let input = document.getElementById('input-destino');
@@ -144,9 +188,8 @@ const maps = {
 
   initializePoling() {
     polingInterval = setInterval(() => {
-      console.log('Make request');
-      getParkingPlaces(currentDestinPosition)
-    }, 5000);
+      getParkingPlaces(currentDestinPosition);
+    }, 3000);
   }
 }
 

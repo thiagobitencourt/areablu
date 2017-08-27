@@ -12,6 +12,18 @@ html, body {
   padding: 0;
 }
 
+.modal-size {
+  width: 35%;
+
+  @media screen and (max-width: $break-small) {
+    width: 70%;
+  }
+
+  @media screen and (min-width: $break-small) and (max-width: $break-large) {
+    width: 50%;
+  }
+}
+
 .app-container, #map {
   height: 100%;
 }
