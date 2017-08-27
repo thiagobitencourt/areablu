@@ -39,6 +39,9 @@ public class VagaHistorico {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Vaga vaga;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Carro carro;
+
 	@PrePersist
 	private void beforePersist() {
 		createdAt = new Date();

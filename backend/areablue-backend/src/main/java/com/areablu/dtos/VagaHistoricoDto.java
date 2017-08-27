@@ -11,9 +11,11 @@ import com.areablu.entities.VagaStatus;
 public class VagaHistoricoDto {
 	private VagaStatus status;
 	private Date date;
+	private String placa;
 
 	public VagaHistoricoDto(VagaHistorico historico) {
 		this.status = historico.getStatus();
 		this.date = historico.getCreatedAt();
+		this.placa = historico.getCarro() != null ? historico.getCarro().getPlaca() : null;
 	}
 }

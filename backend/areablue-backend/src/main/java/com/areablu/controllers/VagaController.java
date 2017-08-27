@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.areablu.dtos.OcupaVagaDto;
 import com.areablu.dtos.VagaDto;
 import com.areablu.dtos.VagaStatusUpdaterDto;
 import com.areablu.dtos.VagasFilterDto;
@@ -54,10 +55,27 @@ public class VagaController {
 		return new VagaDto( vagaStatusUpdater.changeStatus( vagaStatusUpdaterDto ) );
 	}
 
+	@RequestMapping(value = "/ocupar", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public VagaDto ocuparVaga(@RequestBody OcupaVagaDto ocupaVagaDto) {
+		return new VagaDto( vagaStatusUpdater.ocuparVaga( ocupaVagaDto ) );
+	}
+
 	@RequestMapping(value = "/altera-status/{sensorId}/{status}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public VagaDto updateStatus(@PathVariable String sensorId, @PathVariable VagaStatus status) {
 		return new VagaDto( vagaStatusUpdater.changeStatus( new VagaStatusUpdaterDto( sensorId, status ) ) );
 	}
+
+	$.ajax({
+		type: "POST",
+		url: "/vaga/ocupar",
+		data: {"vagaId" : vagaId, "placa" : placa},
+		contentType: "application/json; charset=utf-8",
+		dataType: "json",
+		success: function(data){alert(data);},
+		failure: function(errMsg) {
+			alert(errMsg);
+		}
+	});
 
 	@RequestMapping(value = "/{vagaId}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable String vagaId) {
