@@ -42,7 +42,7 @@ let config = {
   plugins: [
     new ExtractTextWebpackPlugin('styles.css'),
     new HtmlWebpackPlugin({
-      title: 'ES6-SEED',
+      title: 'AreaBLU',
       version: packageJson.version,
       name: packageJson.name,
       template: './src/index.html'

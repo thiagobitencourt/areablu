@@ -13,7 +13,8 @@ let currentLocation;
 let markers = [];
 let parkingCircle;
 let markerCluster;
-let defaultCircleRadius = 200;
+let defaultCircleRadius = 250;
+let defaultRefreshMarkers = 3000;
 let currentDestinPosition;
 let polingInterval;
 
@@ -73,12 +74,7 @@ const maps = {
   ocuparVaga() {
     let placa = $('#car-plate').val();
     let vagaId = $('#position-id').val();
-    console.log(placa);
-    console.log(vagaId);
-    API.occupyParkingSpot(vagaId, placa)
-      .then(result => {
-        console.log(result);
-      });
+    API.occupyParkingSpot(vagaId, placa);
     $('#modal1').modal('close');
     $('#car-plate').val();
   },
@@ -96,7 +92,9 @@ const maps = {
     let marker = new google.maps.Marker({ map, position, icon });
     marker.id = position.id;
     markers.push(marker);
-    addListener(marker, position.id);
+    if(position.status === "OCUPADA") {
+      addListener(marker, position.id);
+    }
   },
 
   createCircle(position, radius = defaultCircleRadius) {
@@ -178,7 +176,7 @@ const maps = {
   initializePoling() {
     polingInterval = setInterval(() => {
       getParkingPlaces(currentDestinPosition);
-    }, 3000);
+    }, defaultRefreshMarkers);
   }
 }
 
