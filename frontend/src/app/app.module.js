@@ -156,13 +156,12 @@ const maps = {
         zoom: 14,
         styles: [{ featureType: "poi", stylers: [{ visibility: "off" }] }]
       });
-      currentLocation.id = 654;
+
       currentDestinPosition = currentLocation;
       // Centraliza o mapa na posição inicial do usuário
-      createMarker(currentLocation);
       centerMap(currentLocation);
       createCircle(currentLocation);
-      // getParkingPlaces(currentLocation);
+      getParkingPlaces(currentLocation);
       map.setZoom(17);
 
       let input = document.getElementById('input-destino');
