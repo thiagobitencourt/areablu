@@ -65,18 +65,6 @@ public class VagaController {
 		return new VagaDto( vagaStatusUpdater.changeStatus( new VagaStatusUpdaterDto( sensorId, status ) ) );
 	}
 
-	$.ajax({
-		type: "POST",
-		url: "/vaga/ocupar",
-		data: {"vagaId" : vagaId, "placa" : placa},
-		contentType: "application/json; charset=utf-8",
-		dataType: "json",
-		success: function(data){alert(data);},
-		failure: function(errMsg) {
-			alert(errMsg);
-		}
-	});
-
 	@RequestMapping(value = "/{vagaId}", method = RequestMethod.DELETE)
 	public void delete(@PathVariable String vagaId) {
 		vagaRepository.delete( vagaId );
