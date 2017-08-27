@@ -74,6 +74,7 @@ const maps = {
 
   ocuparVaga({ vaga, ...carro}) {
       console.log(vaga, carro);
+      $('#modal1').modal('close');
       // Aqui chama a api de vincular um carro a uma vaga.
   },
   // Método chamado ao clicar em uma vaga
