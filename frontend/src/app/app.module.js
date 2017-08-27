@@ -19,6 +19,10 @@ $(document).ready(function(){
   $('.modal').modal({
     dismissible: true
   });
+
+  $(document).ready(function() {
+    $('select').material_select();
+  });
 });
 
 const maps = {
@@ -73,9 +77,12 @@ const maps = {
   },
 
   ocuparVaga({ vaga, ...carro}) {
-      console.log(vaga, carro);
-      $('#modal1').modal('close');
-      // Aqui chama a api de vincular um carro a uma vaga.
+    let permanencia = $('#select-permanencia').find(":selected").val();
+    API.occupyParkingSpot({ vaga, carro, permanencia })
+      .then(result => {
+        console.log(result);
+      });
+    $('#modal1').modal('close');
   },
   // Método chamado ao clicar em uma vaga
   clickMarker() {

@@ -5,7 +5,7 @@ export default (function() {
     getParkingLocations({ lat, lng }, distance) {
       return new Promise((resolve, reject) => {
         $.ajax({
-          'type': 'POST',
+          'type': 'GET',
           'url': API_URL + `/vaga`,
           'contentType': 'application/json',
           'data': { lat, lng, distance },
@@ -15,9 +15,11 @@ export default (function() {
       });
     },
 
-    occupySpot(spotId, car) {
+    occupyParkingSpot({ vaga, carro, permanencia }) {
       return new Promise((resolve, reject) => {
-        $.post(API_URL + `/vaga/ocupar`);
+        console.log({ vaga, carro, permanencia });
+        resolve("Chamar a ENDPOINT de acupar a vaga");
+        // $.post(API_URL + `/vaga/ocupar`);
       });
     }
   };
